@@ -9,10 +9,10 @@
     <style>
         /* Custom styles for card layout and theme */
         .card {
-            background-color: #2f855a; /* Dark green background */
-            border: 1px solid #276749; /* Border color */
+            background-color: #ffffff; /* White background */
+            border: 1px solid #e2e8f0; /* Light gray border */
             border-radius: 8px;
-            padding: 12px; /* Reduced padding */
+            
             margin: 12px; /* Added margin */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%; /* Set default width */
@@ -28,26 +28,45 @@
             font-size: 1.125rem; /* Reduced font size */
             font-weight: 600;
             cursor: pointer;
-            color: #e6fffa; /* Light green text */
+            color: #ffffff; /* White text */
+            background-color: #2f855a; /* Dark green background for header */
+            padding: 12px; /* Match padding with card */
+            border-radius: 8px 8px 0 0; /* Rounded corners only on the top */
         }
 
         .card-body {
             display: none;
             margin-top: 12px; /* Reduced margin */
+            background-color: #f7fafc; /* Light gray background for body */
+            padding: 12px; /* Match padding with card */
+            border-radius: 0 0 8px 8px; /* Rounded corners only on the bottom */
         }
 
-        .card-body.open {
+        .card-body.show {
             display: block;
         }
 
+        .arrow-icon {
+            transition: transform 0.3s ease; /* Smooth transition */
+        }
+
+        .arrow-icon.rotate {
+            transform: rotate(180deg); /* Rotate the arrow icon */
+        }
+
+        /* Additional styles for column-container */
+        .column-container {
+            position: relative;
+        }
+
         .listing-card {
-            background-color: #276749; /* Darker green background */
-            border: 1px solid #2f855a; /* Border color */
+            background-color: #f7fafc; /* Light gray background */
+            border: 1px solid #e2e8f0; /* Light gray border */
             border-radius: 8px;
             padding: 8px; /* Reduced padding */
             margin-bottom: 12px; /* Reduced margin-bottom */
             text-align: center; /* Center-align text and button */
-            color: #e6fffa; /* Light green text */
+            color: #333333; /* Dark text color for readability */
         }
 
         .listing-card h4 {
@@ -58,10 +77,10 @@
 
         .listing-card p {
             margin-top: 4px; /* Reduced margin */
-            background-color: #22543d; /* Darkest green background */
+            background-color: #e2e8f0; /* Light gray background */
             padding: 6px; /* Reduced padding */
             border-radius: 4px;
-            border: 1px solid #2f855a;
+            border: 1px solid #cbd5e0; /* Slightly darker gray border */
             font-size: 0.875rem; /* Smaller font size */
         }
 
@@ -111,7 +130,7 @@
         /* Grid layout adjustments */
         .grid-container {
             display: grid;
-            grid-template-columns: 1fr; /* Single column layout */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust columns to fit content */
             gap: 16px;
         }
 
@@ -136,67 +155,61 @@
             gap: 16px; /* Adjust spacing between navigation items as needed */
         }
 
-        .arrow-icon {
-            transition: transform 0.3s ease; /* Smooth transition */
+        /* Search bar styles */
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin: 16px 0;
         }
 
-        /* Search bar styles */
-        /* Search bar styles */
-.search-bar {
-    display: flex;
-    justify-content: center;
-    margin: 16px 0;
-}
+        .search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 10px 15px; /* Increased padding for a more comfortable feel */
+            border-radius: 8px;
+            border: 1px solid #2f855a;
+            font-size: 1rem;
+            background-color: #ffffff; /* White background for input */
+            color: #333333; /* Dark text color */
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition effects */
+        }
 
-.search-input {
-    width: 100%;
-    max-width: 500px;
-    padding: 10px 15px; /* Increased padding for a more comfortable feel */
-    border-radius: 8px;
-    border: 1px solid #2f855a;
-    font-size: 1rem;
-    background-color: #22543d; /* Dark green background to match the theme */
-    color: #e6fffa; /* Light green text color */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition effects */
-}
+        .search-input::placeholder {
+            color: #a0aec0; /* Light gray placeholder text */
+        }
 
-.search-input::placeholder {
-    color: #9ae6b4; /* Light green placeholder text */
-}
+        .search-input:focus {
+            outline: none;
+            border-color: #38a169; /* Slightly brighter green border on focus */
+            box-shadow: 0 0 5px #38a169; /* Subtle green glow on focus */
+        }
 
-.search-input:focus {
-    outline: none;
-    border-color: #38a169; /* Slightly brighter green border on focus */
-    box-shadow: 0 0 5px #38a169; /* Subtle green glow on focus */
-}
+        .search-button {
+            background-color: #2f855a;
+            color: white;
+            border: none;
+            padding: 10px 18px; /* Matching the padding of the input field */
+            margin-left: 8px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center; /* Center the button content */
+            justify-content: center; /* Center the button content */
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition effects */
+        }
 
-.search-button {
-    background-color: #2f855a;
-    color: white;
-    border: none;
-    padding: 10px 18px; /* Matching the padding of the input field */
-    margin-left: 8px;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center; /* Center the button content */
-    justify-content: center; /* Center the button content */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition effects */
-}
+        .search-button:hover {
+            background-color: #276749; /* Darker green on hover */
+        }
 
-.search-button:hover {
-    background-color: #276749; /* Darker green on hover */
-}
-
-.search-button svg {
-    width: 20px;
-    height: 20px;
-}
-
+        .search-button svg {
+            width: 20px;
+            height: 20px;
+        }
     </style>
 </head>
-<body class="bg-green-900 text-white">
+<body class="bg-gray-100 text-gray-900">
     <!-- Header -->
     <header class="bg-green-800 p-5 relative">
         <div class="header-content">
@@ -205,10 +218,9 @@
                 <!-- <img src="{{ asset('Bagong Pilipinas.png') }}" alt="Logo" class="w-20"> -->
                 <img src="{{ asset('DOH Logo.png') }}" alt="Logo" class="w-20">
             </div>
-            <h1 class="text-3xl font-bold">DOH SYSTEM PORTAL</h1>
+            <h1 class="text-3xl font-bold text-white">DOH SYSTEM PORTAL</h1>
         </div>
         <nav class="header-nav">
-            
             @auth
                 <a href="{{ route('dashboard') }}" class="text-green-400 hover:underline">Dashboard</a>
                 <form action="{{ route('logout') }}" method="POST" class="inline">
@@ -216,7 +228,7 @@
                     <button type="submit" class="text-green-400 hover:underline">Logout</button>
                 </form>
             @else
-            <a href="{{ route('home') }}" class="text-green-400 hover:underline">home</a>
+                <a href="{{ route('home') }}" class="text-green-400 hover:underline">Home</a>
                 <!-- <a href="{{ route('login') }}" class="text-green-400 hover:underline">Login</a> -->
             @endauth
         </nav>
@@ -228,67 +240,79 @@
         <div class="text-center">
             <p class="text-lg">Explore web listings and manage your resources effectively.</p>
         </div>
-<div class="bg-green-700">
-    <!-- Search Bar -->
-    <div class="search-bar">
-        <form action="{{ route('search') }}" method="GET" class="flex items-center">
-            <input type="text" name="query" placeholder="Search categories or web listings..." 
-                class="search-input focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300">
-            <button type="submit" class="search-button hover:bg-green-700 transition-all duration-300">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-            </button>
-        </form>
-    </div>
-        <!-- Display categories and web listings -->
-        <div class="mt-8 grid-container">
-            @forelse($categories as $category)
-                <div class="card">
-                    <h3 class="card-header" onclick="toggleCategory('{{ $category->id }}')">
-                        {{ $category->name }}
-                        <svg class="arrow-icon w-4 h-4 text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        <div >
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <form action="{{ route('search') }}" method="GET" class="flex">
+                    <input type="text" name="query" placeholder="Search..." class="search-input" value="{{ request('query') }}">
+                    <button type="submit" class="search-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
                         </svg>
-                    </h3>
-                    <div id="category-details-{{ $category->id }}" class="card-body">
-                        @forelse($category->webListings as $listing)
-                            <div class="listing-card">
-                                <h4>{{ $listing->title }}</h4>
-                                <p>{{ $listing->description }}</p>
-                                <div class="btn-container">
-                                    <button class="btn btn-primary" onclick="toggleDetails('{{ $listing->id }}')">See More</button>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Display categories and web listings -->
+            <h2 class="text-2xl font-semibold mb-4 text-green-800">Web Listings by Category</h2>
+            @forelse($categories as $category)
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold mb-2 text-green-800">{{ $category->name }}</h3>
+                    @if($category->webListings->isEmpty())
+                        <p class="text-lg text-green-600">No web listings available for this category.</p>
+                    @else
+                        <div class="grid grid-cols-3 gap-4">
+                            @foreach($category->webListings as $listing)
+                                <div class="relative column-container">
+                                    <div class="card">
+                                        <div class="card-header dropdown-toggle cursor-pointer flex justify-between items-center" onclick="toggleDropdown('dropdown-content-{{ $listing->id }}', this)">
+                                            <span class="font-semibold">{{ $listing->title }}</span>
+                                            <svg class="arrow-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </div>
+                                        <div id="dropdown-content-{{ $listing->id }}" class="dropdown-content card-body">
+                                            <p class="mt-2 text-gray-800">{{ $listing->description }}</p>
+                                            <p class="mt-2 text-sm text-gray-600">Category: {{ $category->name }}</p>
+                                            <div class="mt-2 flex space-x-2">
+                                                <a href="{{ $listing->local_link }}" class="btn btn-primary">Local Link</a>
+                                                <a href="{{ $listing->external_link }}" class="btn btn-secondary">External Link</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div id="details-{{ $listing->id }}" class="hidden mt-4">
-                                    <p>{{ $listing->additional_details }}</p>
-                                    <a href="{{ $listing->local_link }}" class="btn btn-secondary">Local Access</a>
-                                    <a href="{{ $listing->external_link }}" class="btn btn-primary">External Access</a>
-                                </div>
-                            </div>
-                        @empty
-                            <p>No web listings available.</p>
-                        @endforelse
-                    </div>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             @empty
-                <p>No categories available.</p>
+                <p class="text-lg text-green-300">No categories available.</p>
             @endforelse
         </div>
-</div>
-         
     </main>
 
     <script>
-        function toggleCategory(id) {
-            const details = document.getElementById('category-details-' + id);
-            const arrowIcon = details.previousElementSibling.querySelector('.arrow-icon');
-            details.classList.toggle('open');
-            arrowIcon.classList.toggle('rotate-180');
-        }
+        function toggleDropdown(id, element) {
+            const columnContainer = element.closest('.column-container');
+            const allDropdownsInColumn = columnContainer.querySelectorAll('.dropdown-content');
+            const allArrowsInColumn = columnContainer.querySelectorAll('.arrow-icon');
+            
+            allDropdownsInColumn.forEach(dropdown => {
+                if (dropdown.id === id) {
+                    dropdown.classList.toggle('show');
+                } else {
+                    dropdown.classList.remove('show');
+                }
+            });
 
-        function toggleDetails(id) {
-            const details = document.getElementById('details-' + id);
-            details.classList.toggle('hidden');
+            allArrowsInColumn.forEach(arrow => {
+                if (arrow.parentElement.nextElementSibling.id === id) {
+                    arrow.classList.toggle('rotate');
+                } else {
+                    arrow.classList.remove('rotate');
+                }
+            });
         }
     </script>
 </body>

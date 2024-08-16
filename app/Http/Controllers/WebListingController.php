@@ -10,10 +10,10 @@ class WebListingController extends Controller
 {
     public function index()
     {
-        $categories = Category::withCount('webListings')->get();
+        $categories = Category::withCount ('webListings')->get();
 
         // Return a view and pass the categories data
-        return view('web_listings.index', compact('categories'));
+        return view ('web_listings.index', compact('categories'));
     }
 
     /**
@@ -113,7 +113,7 @@ class WebListingController extends Controller
         $webListing->delete();
 
         // Redirect to the web listings index with a success message
-        return redirect()->route('web_listings.index')
+        return redirect()->route('web_listings.create')
                          ->with('success', 'Web listing deleted successfully.');
     }
 }
